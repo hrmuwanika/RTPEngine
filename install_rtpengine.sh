@@ -83,10 +83,7 @@ sudo apt install -y git \
                 keyutils libnfsidmap2 \
                 nfs-common rpcbind \
                 libtirpc3 libconfig-tiny-perl \
-                dh-autoreconf
-
-
- sudo apt install -y glibavcodec-dev libio-multiplex-perl libjson-glib-dev libnet-interface-perl 
+                dh-autoreconf libio-multiplex-perl libglib2.0-dev 
 
 #--------------------------------------------
 # Download rtpengine from source
@@ -121,7 +118,7 @@ dpkg -i ngcp-rtpengine-daemon_*.deb
 # Getting it Running:
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
-# Uncomment and update the interface IP of your server
+# We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
 vim /etc/rtpengine/rtpengine.conf
 
 # Edit ngcp-rtpengine-daemon and ngcp-rtpengine-recording-daemon files:
