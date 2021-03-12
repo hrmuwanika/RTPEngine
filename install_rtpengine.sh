@@ -39,12 +39,12 @@ ffmpeg -version
 #--------------------------------------------
 # Install required libraries
 #--------------------------------------------
-apt-get install -y git \
+sudo apt install -y git \
                 dpkg-dev \
                 cmake \
                 unzip \
                 wget \
-                debhelper-compat \
+                debhelper \
                 default-libmysqlclient-dev \
                 gperf \
                 iptables-dev \
@@ -62,11 +62,13 @@ apt-get install -y git \
                 libhiredis-dev libio-multiplex-perl \
                 libio-socket-inet6-perl libiptc-dev \
                 libjson-glib-dev libnet-interface-perl \
-                libpcap0.8-dev \
+                libpcap0.8-dev libpcap-dev
+                libhiredis-dev \
                 libpcre3-dev \
                 libsocket6-perl \
                 libspandsp-dev \
                 libssl-dev \
+                libevent-dev \
                 libswresample-dev \
                 libsystemd-dev \
                 libxmlrpc-core-c3-dev \
@@ -75,11 +77,13 @@ apt-get install -y git \
                 wget \
                 zlib1g-dev \
                 dkms \
-                build-essentials
+                build-essential \
+                module-assistant \
+                libwebsockets-dev
 
 
-# sudo apt install -y debhelper default-libmysqlclient-dev glibavcodec-dev libhiredis-dev libio-multiplex-perl libjson-glib-dev \
-# libnet-interface-perl module-assistant keyutils libnfsidmap2 nfs-common rpcbind libconfig-tiny-perl dh-autoreconf 
+ sudo apt install -y glibavcodec-dev libio-multiplex-perl libjson-glib-dev libnet-interface-perl \
+ keyutils libnfsidmap2 nfs-common rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libconfig-tiny-perl
 
 #--------------------------------------------
 # Download rtpengine from source
