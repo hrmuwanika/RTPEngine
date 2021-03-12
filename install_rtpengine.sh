@@ -39,12 +39,47 @@ ffmpeg -version
 #--------------------------------------------
 # Install required libraries
 #--------------------------------------------
-sudo apt install -y debhelper default-libmysqlclient-dev gperf iptables-dev libavcodec-dev libavfilter-dev libcurl4-openssl-dev \
-libavformat-dev libavutil-dev libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl \
-libdigest-hmac-perl libevent-dev libhiredis-dev libio-multiplex-perl libio-socket-inet6-perl libiptc-dev libjson-glib-dev \
-libnet-interface-perl libpcap0.8-dev libsocket6-perl libspandsp-dev libswresample-dev libsystemd-dev libxmlrpc-core-c3-dev \
-markdown dkms module-assistant keyutils libnfsidmap2 nfs-common rpcbind libconfig-tiny-perl dh-autoreconf git unzip \
-libpcre3 libpcre3-dev build-essential
+apt-get install -y git \
+                dpkg-dev \
+                cmake \
+                unzip \
+                wget \
+                debhelper-compat \
+                default-libmysqlclient-dev \
+                gperf \
+                iptables-dev \
+                libavcodec-dev \
+                libavfilter-dev \
+                libavformat-dev \
+                libavutil-dev \
+                libbencode-perl \
+                libcrypt-openssl-rsa-perl \
+                libcrypt-rijndael-perl \
+                libcurl4-openssl-dev \
+                libdigest-crc-perl \
+                libdigest-hmac-perl \
+                libevent-dev libglib2.0-dev \
+                libhiredis-dev libio-multiplex-perl \
+                libio-socket-inet6-perl libiptc-dev \
+                libjson-glib-dev libnet-interface-perl \
+                libpcap0.8-dev \
+                libpcre3-dev \
+                libsocket6-perl \
+                libspandsp-dev \
+                libssl-dev \
+                libswresample-dev \
+                libsystemd-dev \
+                libxmlrpc-core-c3-dev \
+                markdown \
+                curl \
+                wget \
+                zlib1g-dev \
+                dkms \
+                build-essentials
+
+
+# sudo apt install -y debhelper default-libmysqlclient-dev glibavcodec-dev libhiredis-dev libio-multiplex-perl libjson-glib-dev \
+# libnet-interface-perl module-assistant keyutils libnfsidmap2 nfs-common rpcbind libconfig-tiny-perl dh-autoreconf 
 
 #--------------------------------------------
 # Download rtpengine from source
