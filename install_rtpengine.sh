@@ -79,11 +79,14 @@ sudo apt install -y git \
                 dkms \
                 build-essential \
                 module-assistant \
-                libwebsockets-dev
+                libwebsockets-dev \
+                keyutils libnfsidmap2 \
+                nfs-common rpcbind \
+                libtirpc3 libconfig-tiny-perl \
+                dh-autoreconf
 
 
- sudo apt install -y glibavcodec-dev libio-multiplex-perl libjson-glib-dev libnet-interface-perl \
- keyutils libnfsidmap2 nfs-common rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libconfig-tiny-perl
+ sudo apt install -y glibavcodec-dev libio-multiplex-perl libjson-glib-dev libnet-interface-perl 
 
 #--------------------------------------------
 # Download rtpengine from source
@@ -149,3 +152,5 @@ systemctl restart ngcp-rtpengine-recording-daemon.service
 systemctl restart ngcp-rtpengine-recording-nfs-mount.service
 
 ps -ef | grep rtpengine
+
+
