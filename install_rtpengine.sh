@@ -40,50 +40,60 @@ ffmpeg -version
 # Install required libraries
 #--------------------------------------------
 sudo apt install -y git \
-                dpkg-dev \
-                cmake \
-                unzip \
-                wget \
-                debhelper \
-                default-libmysqlclient-dev \
-                gperf \
-                iptables-dev \
-                libavcodec-dev \
-                libavfilter-dev \
-                libavformat-dev \
-                libavutil-dev \
-                libbencode-perl \
-                libcrypt-openssl-rsa-perl \
-                libcrypt-rijndael-perl \
-                libcurl4-openssl-dev \
-                libdigest-crc-perl \
-                libdigest-hmac-perl \
-                libevent-dev libglib2.0-dev \
-                libhiredis-dev libio-multiplex-perl \
-                libio-socket-inet6-perl libiptc-dev \
-                libjson-glib-dev libnet-interface-perl \
-                libpcap0.8-dev libpcap-dev \
-                libhiredis-dev \
-                libpcre3-dev \
-                libsocket6-perl \
-                libspandsp-dev \
-                libssl-dev \
-                libevent-dev \
-                libswresample-dev \
-                libsystemd-dev \
-                libxmlrpc-core-c3-dev \
-                markdown \
-                curl \
-                wget \
-                zlib1g-dev \
-                dkms \
-                build-essential \
-                module-assistant \
-                libwebsockets-dev \
-                keyutils libnfsidmap2 \
-                nfs-common rpcbind \
-                libtirpc3 libconfig-tiny-perl \
-                dh-autoreconf libio-multiplex-perl libglib2.0-dev 
+                    dpkg-dev \
+                    cmake \
+                    unzip \
+                    wget \
+                    debhelper \
+                    default-libmysqlclient-dev \
+                    gperf \
+                    iptables-dev \
+                    libavcodec-dev \
+                    libavfilter-dev \
+                    libavformat-dev \
+                    libavutil-dev \
+                    libbencode-perl \
+                    libcrypt-openssl-rsa-perl \
+                    libcrypt-rijndael-perl \
+                    libcurl4-openssl-dev \
+                    libdigest-crc-perl \
+                    libdigest-hmac-perl \
+                    libevent-dev \
+                    libglib2.0-dev \
+                    libhiredis-dev \
+                    libio-multiplex-perl \
+                    libio-socket-inet6-perl \
+                    libiptc-dev \
+                    libjson-glib-dev \
+                    libnet-interface-perl \
+                    libpcap0.8-dev \
+                    libpcap-dev \
+                    libhiredis-dev \
+                    libpcre3-dev \
+                    libsocket6-perl \
+                    libspandsp-dev \
+                    libssl-dev \
+                    libevent-dev \
+                    libswresample-dev \
+                    libsystemd-dev \
+                    libxmlrpc-core-c3-dev \
+                    markdown \
+                    curl \
+                    wget \
+                    zlib1g-dev \
+                    dkms \
+                    build-essential \
+                    module-assistant \
+                    libwebsockets-dev \
+                    keyutils \
+                    libnfsidmap2 \
+                    nfs-common \
+                    rpcbind \
+                    libtirpc3 \
+                    libconfig-tiny-perl \
+                    dh-autoreconf \
+                    libio-multiplex-perl \
+                    libglib2.0-dev 
 
 #--------------------------------------------
 # Download rtpengine from source
