@@ -142,7 +142,6 @@ dpkg -i ngcp-rtpengine-recording-daemon_*.deb
 sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
 
 cp /etc/rtpengine/rtpengine-recording.sample.conf /etc/rtpengine/rtpengine-recording.conf
-vim /etc/rtpengine/rtpengine-recording.conf
 mkdir /var/spool/rtpengine
 
 dpkg -i ngcp-rtpengine-utils_*.deb
