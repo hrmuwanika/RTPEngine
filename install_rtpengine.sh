@@ -4,7 +4,7 @@
 # Installation of RTPengine on debian 10 
 #--------------------------------------------
 
-EXTERNAL_IP=136.224.67.56
+EXTERNAL_IP=78.141.203.153
 
 #----------------------------------------------------
 # Disable password authentication
