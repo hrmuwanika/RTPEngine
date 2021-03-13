@@ -62,7 +62,7 @@ sudo apt install -y git \
                 libhiredis-dev libio-multiplex-perl \
                 libio-socket-inet6-perl libiptc-dev \
                 libjson-glib-dev libnet-interface-perl \
-                libpcap0.8-dev libpcap-dev
+                libpcap0.8-dev libpcap-dev \
                 libhiredis-dev \
                 libpcre3-dev \
                 libsocket6-perl \
