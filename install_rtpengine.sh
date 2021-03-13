@@ -129,19 +129,17 @@ dpkg -i ngcp-rtpengine-daemon_*.deb
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
 # We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
-vim /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# interface = 123.234.345.456/interface = 136.244.67.56/'   /etc/rtpengine/rtpengine.conf
 
 # Edit ngcp-rtpengine-daemon and ngcp-rtpengine-recording-daemon files:
-vim /etc/default/ngcp-rtpengine-daemon
-        RUN_RTPENGINE=yes
+sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-daemon
 
 dpkg -i ngcp-rtpengine-iptables_*.deb
 dpkg -i ngcp-rtpengine-kernel-dkms_*.deb
 dpkg -i ngcp-rtpengine-kernel-source_*.deb
 dpkg -i ngcp-rtpengine-recording-daemon_*.deb
 
-vim /etc/default/ngcp-rtpengine-recording-daemon
-        RUN_RTPENGINE_RECORDING=yes
+sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
 
 cp /etc/rtpengine/rtpengine-recording.sample.conf /etc/rtpengine/rtpengine-recording.conf
 vim /etc/rtpengine/rtpengine-recording.conf
