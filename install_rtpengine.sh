@@ -29,12 +29,7 @@ echo "set mouse-=a" >> ~/.vimrc
 # Installation of FFMPEG v4
 #----------------------------------------------
 # Install FFmpeg 4 using External Repository
-sudo apt install -y gnupg gnupg1 gnupg2
-add-apt-repository ppa:jonathonf/ffmpeg-4
-sudo apt update
-
 sudo apt install -y ffmpeg
-ffmpeg -version
 
 #--------------------------------------------
 # Install required libraries
