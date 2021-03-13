@@ -4,6 +4,8 @@
 # Installation of RTPengine on debian 10 
 #--------------------------------------------
 
+EXTERNAL_IP=136.224.67.56
+
 #----------------------------------------------------
 # Disable password authentication
 #----------------------------------------------------
@@ -34,61 +36,35 @@ sudo apt install -y ffmpeg
 #--------------------------------------------
 # Install required libraries
 #--------------------------------------------
-sudo apt install -y git \
-                    dpkg-dev \
-                    cmake \
-                    unzip \
-                    wget \
-                    debhelper \
-                    default-libmysqlclient-dev \
-                    gperf \
-                    iptables-dev \
-                    libavcodec-dev \
-                    libavfilter-dev \
-                    libavformat-dev \
-                    libavutil-dev \
-                    libbencode-perl \
-                    libcrypt-openssl-rsa-perl \
-                    libcrypt-rijndael-perl \
-                    libcurl4-openssl-dev \
-                    libdigest-crc-perl \
-                    libdigest-hmac-perl \
-                    libevent-dev \
-                    libglib2.0-dev \
-                    libhiredis-dev \
-                    libio-multiplex-perl \
-                    libio-socket-inet6-perl \
-                    libiptc-dev \
-                    libjson-glib-dev \
-                    libnet-interface-perl \
-                    libpcap0.8-dev \
-                    libpcap-dev \
-                    libhiredis-dev \
-                    libpcre3-dev \
-                    libsocket6-perl \
-                    libspandsp-dev \
-                    libssl-dev \
-                    libevent-dev \
-                    libswresample-dev \
-                    libsystemd-dev \
-                    libxmlrpc-core-c3-dev \
-                    markdown \
-                    curl \
-                    wget \
-                    zlib1g-dev \
-                    dkms \
-                    build-essential \
-                    module-assistant \
-                    libwebsockets-dev \
-                    keyutils \
-                    libnfsidmap2 \
-                    nfs-common \
-                    rpcbind \
-                    libtirpc3 \
-                    libconfig-tiny-perl \
-                    dh-autoreconf \
-                    libio-multiplex-perl \
-                    libglib2.0-dev 
+        apt install -y logrotate rsyslog
+        apt install -y firewalld 
+        apt install -y iptables-dev
+        apt install -y libcurl4-openssl-dev
+        apt install -y libpcre3-dev libxmlrpc-core-c3-dev
+        apt install -y markdown
+        apt install -y libglib2.0-dev
+        apt install -y libavcodec-dev
+        apt install -y libevent-dev
+        apt install -y libhiredis-dev
+        apt install -y libjson-glib-dev libpcap0.8-dev libpcap-dev libssl-dev
+        apt install -y libavfilter-dev
+        apt install -y libavformat-dev
+        apt install -y libmysqlclient-dev
+        apt install -y libmariadbclient-dev
+        apt install -y default-libmysqlclient-dev
+        apt install -y module-assistant
+        apt install -y dehelper
+        apt install -y dpkg-dev
+        apt install -y dkms
+        apt install -y unzip wget git curl
+        apt install -y libavresample-dev
+        apt install -y linux-headers-$(uname -r)
+        apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl \
+        libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev
+        
+        # other dependencies
+        apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 nfs-common \
+        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf 
 
 #--------------------------------------------
 # Download rtpengine from source
@@ -100,12 +76,12 @@ cd rtpengine
 echo "########## G729 Installation ################"
 
 VER=1.0.4
-curl https://codeload.github.com/BelledonneCommunications/bcg729/tar.gz/$VER >bcg729_$VER.orig.tar.gz
-tar zxf bcg729_$VER.orig.tar.gz 
-cd bcg729-$VER 
-git clone https://github.com/ossobv/bcg729-deb.git debian 
-dpkg-buildpackage -us -uc -sa
-cd ..
+curl -s https://codeload.github.com/BelledonneCommunications/bcg729/tar.gz/$VER > bcg729_$VER.orig.tar.gz &&
+tar zxf bcg729_$VER.orig.tar.gz &&
+cd bcg729-$VER &&
+git clone https://github.com/ossobv/bcg729-deb.git debian &&
+dpkg-buildpackage -us -uc -sa &&
+cd .. &&
 dpkg -i libbcg729-*.deb
 
 ########################################################
@@ -114,25 +90,25 @@ dpkg -i libbcg729-*.deb
 dpkg-checkbuilddeps
 
 # If you get an empty output you’re good to start building the packages:
-dpkg-buildpackage 
+dpkg-buildpackage -us -uc -sa &&
+cd .. &&
 
-cd ..
-
-dpkg -i ngcp-rtpengine-daemon_*.deb
+dpkg -i ./ngcp-rtpengine-daemon_*.deb
 
 # Getting it Running:
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
 # We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
-sudo sed -i 's/# interface = 123.234.345.456/interface = 136.244.67.56/'   /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# interface = 123.234.345.456/interface = $EXTERNAL_IP/' /etc/rtpengine/rtpengine.conf
 
 # Edit ngcp-rtpengine-daemon and ngcp-rtpengine-recording-daemon files:
 sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-daemon
 
-dpkg -i ngcp-rtpengine-iptables_*.deb
-dpkg -i ngcp-rtpengine-kernel-dkms_*.deb
-dpkg -i ngcp-rtpengine-kernel-source_*.deb
-dpkg -i ngcp-rtpengine-recording-daemon_*.deb
+dpkg -i ./ngcp-rtpengine-iptables_*.deb
+dpkg -i ./ngcp-rtpengine-kernel-dkms_*.deb
+dpkg -i ./ngcp-rtpengine-kernel-source_*.deb
+dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb
+dpkg -i ./ngcp-rtpengine-utils_*.deb
 
 sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
 
