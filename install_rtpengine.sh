@@ -37,7 +37,6 @@ sudo apt install -y ffmpeg
 # Install required libraries
 #--------------------------------------------
         apt install -y logrotate rsyslog
-        apt install -y firewalld 
         apt install -y iptables-dev
         apt install -y libcurl4-openssl-dev
         apt install -y libpcre3-dev libxmlrpc-core-c3-dev
@@ -49,7 +48,6 @@ sudo apt install -y ffmpeg
         apt install -y libjson-glib-dev libpcap0.8-dev libpcap-dev libssl-dev
         apt install -y libavfilter-dev
         apt install -y libavformat-dev
-        apt install -y libmysqlclient-dev
         apt install -y libmariadbclient-dev
         apt install -y default-libmysqlclient-dev
         apt install -y module-assistant
