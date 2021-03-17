@@ -97,7 +97,7 @@ dpkg -i ./ngcp-rtpengine-daemon_*.deb
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
 # We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
-sudo sed -i 's/# interface = 123.234.345.456/interface = $EXTERNAL_IP/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/#interface=123.234.345.456/interface=$EXTERNAL_IP/' /etc/rtpengine/rtpengine.conf
 
 # Edit ngcp-rtpengine-daemon and ngcp-rtpengine-recording-daemon files:
 sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-daemon
