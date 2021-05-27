@@ -51,7 +51,8 @@ sudo apt install -y ffmpeg
         apt install -y libmariadbclient-dev
         apt install -y default-libmysqlclient-dev
         apt install -y module-assistant
-        apt install -y dehelper
+        apt install -y debhelper
+        apt install -y nfs-common libb-hooks-op-check-perl
         apt install -y dpkg-dev
         apt install -y dkms
         apt install -y unzip wget git curl
@@ -61,7 +62,7 @@ sudo apt install -y ffmpeg
         libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev
         
         # other dependencies
-        apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 nfs-common \
+        apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
         rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf 
 
 #--------------------------------------------
