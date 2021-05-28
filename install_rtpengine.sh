@@ -62,19 +62,6 @@ sudo apt install -y ffmpeg
         # other dependencies
         apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
         rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev 
-
-#--------------------------------------------
-# Install and configure Firewalld
-#--------------------------------------------
-sudo apt install -y firewalld
-
-# Enable and start firewalld if not already running
-    systemctl enable firewalld
-    systemctl start firewalld
-
-    # Setup Firewall rules for RTPEngine
-    firewall-cmd --zone=public --add-port=30000-40000/udp --permanent
-    firewall-cmd --reload
     
 #--------------------------------------------
 # Download rtpengine from source
@@ -142,6 +129,10 @@ systemctl enable ngcp-rtpengine-recording-nfs-mount.service
 systemctl restart ngcp-rtpengine-daemon.service 
 systemctl restart ngcp-rtpengine-recording-daemon.service 
 systemctl restart ngcp-rtpengine-recording-nfs-mount.service
+
+systemctl status ngcp-rtpengine-daemon.service 
+systemctl status ngcp-rtpengine-recording-daemon.service 
+systemctl status ngcp-rtpengine-recording-nfs-mount.service
 
 ps -ef | grep rtpengine
 
