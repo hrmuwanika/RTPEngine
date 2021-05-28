@@ -63,7 +63,7 @@ sudo apt install -y ffmpeg
         
         # other dependencies
         apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
-        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf 
+        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev 
 
 #--------------------------------------------
 # Install and configure Firewalld
