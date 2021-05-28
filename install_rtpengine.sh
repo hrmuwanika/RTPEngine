@@ -130,14 +130,10 @@ dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb
 dpkg -i ./ngcp-rtpengine-utils_*.deb
 dpkg -i ./ngcp-rtpengine_*.deb
 
-# sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-recording-daemon
-# sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
+sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-recording-daemon
+sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
 
 cp /etc/rtpengine/rtpengine-recording.sample.conf /etc/rtpengine/rtpengine-recording.conf
-mkdir /var/spool/rtpengine
-
-dpkg -i ngcp-rtpengine-utils_*.deb
-dpkg -i ngcp-rtpengine_*.deb
 
 systemctl enable ngcp-rtpengine-daemon.service 
 systemctl enable ngcp-rtpengine-recording-daemon.service 
