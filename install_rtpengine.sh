@@ -58,13 +58,26 @@ sudo apt install -y ffmpeg
         apt install -y unzip wget git curl
         apt install -y libavresample-dev
         apt install -y linux-headers-$(uname -r)
-        apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl \
+        apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl libio-socket-ip-perl \
         libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev
         
         # other dependencies
         apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
         rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf 
 
+#--------------------------------------------
+# Install and configure Firewalld
+#--------------------------------------------
+sudo apt install -y firewalld
+
+# Enable and start firewalld if not already running
+    systemctl enable firewalld
+    systemctl start firewalld
+
+    # Setup Firewall rules for RTPEngine
+    firewall-cmd --zone=public --add-port=30000-40000/udp --permanent
+    firewall-cmd --reload
+    
 #--------------------------------------------
 # Download rtpengine from source
 #--------------------------------------------
@@ -98,18 +111,29 @@ dpkg -i ./ngcp-rtpengine-daemon_*.deb
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
 # We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
-sudo sed -i 's/#interface=123.234.345.456/interface=$EXTERNAL_IP/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/RUN_RTPENGINE = no/RUN_RTPENGINE = yes/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# interface = 123.234.345.456/interface = $EXTERNAL_IP/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# recording-dir = /var/spool/rtpengine/recording-dir = /var/spool/rtpengine/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# recording-method=proc/recording-method = proc/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# recording-format = raw/recording-format = raw/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# log-level = 6/log-level = 7/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# log-facility = daemon/log-facility = local1/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# log-facility-cdr = local0/log-facility-cdr = local1/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# log-facility-rtcp = local1/log-facility-rtcp = local1/' /etc/rtpengine/rtpengine.conf
 
 # Edit ngcp-rtpengine-daemon and ngcp-rtpengine-recording-daemon files:
 sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-daemon
 
 dpkg -i ./ngcp-rtpengine-iptables_*.deb
+dpkg -i ./ngcp-rtpengine-daemon_*.deb
 dpkg -i ./ngcp-rtpengine-kernel-dkms_*.deb
 dpkg -i ./ngcp-rtpengine-kernel-source_*.deb
 dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb
 dpkg -i ./ngcp-rtpengine-utils_*.deb
+dpkg -i ./ngcp-rtpengine_*.deb
 
-sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
+# sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-recording-daemon
+# sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
 
 cp /etc/rtpengine/rtpengine-recording.sample.conf /etc/rtpengine/rtpengine-recording.conf
 mkdir /var/spool/rtpengine
