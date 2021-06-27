@@ -71,11 +71,9 @@ sudo apt install -y ffmpeg
     systemctl start firewalld
 
     # Setup Firewall rules for RTPEngine, Kamailio and Siremis
-    firewall-cmd --zone=public --add-port=80/tcp --permanent
-    firewall-cmd --zone=public --add-port=443/tcp --permanent
-    firewall-cmd --zone=public --add-port=5060/udp --permanent
-    firewall-cmd --zone=public --add-port=5060/tcp --permanent
-    firewall-cmd --zone=public --add-port=5061/tcp --permanent
+    firewall-cmd --permanent --zone=public --add-service={http,https}
+    firewall-cmd --permanent --zone=public --add-port={5060,5061}/tcp
+    firewall-cmd --permanent --zone=public --add-port={5060,5061}/udp
     firewall-cmd --zone=public --add-port= 30000- 40000/udp --permanent
     firewall-cmd --reload
     
