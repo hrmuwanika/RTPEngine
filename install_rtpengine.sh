@@ -16,8 +16,7 @@ sudo service sshd restart
 # Update Server
 #--------------------------------------------------
 echo -e "\n============= Update Server ================"
-sudo apt update
-sudo apt upgrade -y
+sudo apt update && sudo apt -y upgrade
 sudo apt autoremove -y
 
 sudo apt install -y vim
@@ -35,6 +34,7 @@ sudo apt install -y ffmpeg
 # Install required libraries
 #--------------------------------------------
         apt install -y logrotate rsyslog
+        apt install -y firewalld
         apt install -y iptables-dev
         apt install -y libcurl4-openssl-dev
         apt install -y libpcre3-dev libxmlrpc-core-c3-dev
@@ -56,12 +56,28 @@ sudo apt install -y ffmpeg
         apt install -y unzip wget git curl
         apt install -y libavresample-dev
         apt install -y linux-headers-$(uname -r)
-        apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl libio-socket-ip-perl \
+        apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl \
         libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev
         
         # other dependencies
         apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
-        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev 
+        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev libarchive13
+    
+#--------------------------------------------
+# Download rtpengine from source
+#--------------------------------------------
+    # Enable and start firewalld if not already running
+    systemctl enable firewalld
+    systemctl start firewalld
+
+    # Setup Firewall rules for RTPEngine, Kamailio and Siremis
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+    firewall-cmd --zone=public --add-port=443/tcp --permanent
+    firewall-cmd --zone=public --add-port=5060/udp --permanent
+    firewall-cmd --zone=public --add-port=5060/tcp --permanent
+    firewall-cmd --zone=public --add-port=5061/tcp --permanent
+    firewall-cmd --zone=public --add-port= 30000- 40000/udp --permanent
+    firewall-cmd --reload
     
 #--------------------------------------------
 # Download rtpengine from source
@@ -90,7 +106,13 @@ dpkg-checkbuilddeps
 dpkg-buildpackage -us -uc -sa &&
 cd .. &&
 
-dpkg -i ./ngcp-rtpengine-daemon_*.deb
+dpkg -i ./ngcp-rtpengine-daemon_*.deb 
+dpkg -i ./ngcp-rtpengine-iptables_*.deb 
+dpkg -i ./ngcp-rtpengine-kernel-source_*.deb
+dpkg -i ./ngcp-rtpengine-kernel-dkms_*.deb
+dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb 
+dpkg -i ./ngcp-rtpengine-utils_*.deb
+
 
 # Getting it Running:
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
