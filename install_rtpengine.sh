@@ -61,7 +61,7 @@ sudo apt install -y ffmpeg
         
         # other dependencies
         apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
-        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev libarchive13
+        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev libarchive13 libmosquitto-dev
     
 #--------------------------------------------
 # Download rtpengine from source
@@ -104,13 +104,13 @@ dpkg-checkbuilddeps
 dpkg-buildpackage -us -uc -sa &&
 cd .. &&
 
-dpkg -i ./ngcp-rtpengine-daemon_*.deb 
-dpkg -i ./ngcp-rtpengine-iptables_*.deb 
-dpkg -i ./ngcp-rtpengine-kernel-source_*.deb
+dpkg -i ./ngcp-rtpengine-iptables_*.deb
+dpkg -i ./ngcp-rtpengine-daemon_*.deb
 dpkg -i ./ngcp-rtpengine-kernel-dkms_*.deb
-dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb 
+dpkg -i ./ngcp-rtpengine-kernel-source_*.deb
+dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb
 dpkg -i ./ngcp-rtpengine-utils_*.deb
-
+dpkg -i ./ngcp-rtpengine_*.deb
 
 # Getting it Running:
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
@@ -128,14 +128,6 @@ sudo sed -i 's/# log-facility-rtcp = local1/log-facility-rtcp = local1/' /etc/rt
 
 # Edit ngcp-rtpengine-daemon and ngcp-rtpengine-recording-daemon files:
 sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-daemon
-
-dpkg -i ./ngcp-rtpengine-iptables_*.deb
-dpkg -i ./ngcp-rtpengine-daemon_*.deb
-dpkg -i ./ngcp-rtpengine-kernel-dkms_*.deb
-dpkg -i ./ngcp-rtpengine-kernel-source_*.deb
-dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb
-dpkg -i ./ngcp-rtpengine-utils_*.deb
-dpkg -i ./ngcp-rtpengine_*.deb
 
 sudo sed -i 's/RUN_RTPENGINE=no/RUN_RTPENGINE=yes/' /etc/default/ngcp-rtpengine-recording-daemon
 sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/default/ngcp-rtpengine-recording-daemon
