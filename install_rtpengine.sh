@@ -34,7 +34,6 @@ sudo apt install -y ffmpeg
 # Install required libraries
 #--------------------------------------------
         apt install -y logrotate rsyslog
-        apt install -y firewalld
         apt install -y iptables-dev
         apt install -y libcurl4-openssl-dev
         apt install -y libpcre3-dev libxmlrpc-core-c3-dev
@@ -62,20 +61,6 @@ sudo apt install -y ffmpeg
         # other dependencies
         apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
         rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev libarchive13 libmosquitto-dev
-    
-#--------------------------------------------
-# Download rtpengine from source
-#--------------------------------------------
-    # Enable and start firewalld if not already running
-    systemctl enable firewalld
-    systemctl start firewalld
-
-    # Setup Firewall rules for RTPEngine, Kamailio and Siremis
-    firewall-cmd --permanent --zone=public --add-service={http,https}
-    firewall-cmd --permanent --zone=public --add-port={5060,5061}/tcp
-    firewall-cmd --permanent --zone=public --add-port={5060,5061}/udp
-    firewall-cmd --zone=public --add-port= 30000- 40000/udp --permanent
-    firewall-cmd --reload
     
 #--------------------------------------------
 # Download rtpengine from source
