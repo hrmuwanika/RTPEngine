@@ -4,6 +4,9 @@
 # Installation of RTPengine on debian 10 
 #--------------------------------------------
 
+#set the ip address
+server_address=$(hostname -I)
+
 #----------------------------------------------------
 # Disable password authentication
 #----------------------------------------------------
@@ -102,8 +105,8 @@ cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
 # We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
 sudo sed -i 's/RUN_RTPENGINE = no/RUN_RTPENGINE = yes/' /etc/rtpengine/rtpengine.conf
-sudo sed -i 's/# interface = 123.234.345.456/interface =  192.248.163.195/' /etc/rtpengine/rtpengine.conf
-# sudo sed -i 's/# recording-dir = /var/spool/rtpengine/recording-dir = /var/spool/rtpengine/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# interface = 123.234.345.456/interface = $server_address/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/# recording-dir = /var/spool/rtpengine/recording-dir = /var/spool/rtpengine/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# recording-method = proc/recording-method = proc/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# recording-format = raw/recording-format = raw/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# log-level = 6/log-level = 7/' /etc/rtpengine/rtpengine.conf
