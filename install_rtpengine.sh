@@ -5,7 +5,7 @@
 #--------------------------------------------
 
 #set the ip address
-server_address=$(hostname -I)
+server_address=45.75.29.77
 
 #----------------------------------------------------
 # Disable password authentication
@@ -104,8 +104,8 @@ dpkg -i ./ngcp-rtpengine_*.deb
 cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
 # We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
-sudo sed -i 's/RUN_RTPENGINE = no/RUN_RTPENGINE = yes/' /etc/rtpengine/rtpengine.conf
-sudo sed -i 's/# interface = 123.234.345.456/interface = $server_address/' /etc/rtpengine/rtpengine.conf
+sudo sed -i 's/RUN_RTPENGINE = no/RUN_RTPENGINE = yes/' /etc/rtpengine/rtpengine.conf 
+sudo echo -e 'interface=$server_address' >> /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# recording-dir = /var/spool/rtpengine/recording-dir = /var/spool/rtpengine/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# recording-method = proc/recording-method = proc/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# recording-format = raw/recording-format = raw/' /etc/rtpengine/rtpengine.conf
