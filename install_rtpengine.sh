@@ -58,6 +58,7 @@ sudo apt install -y ffmpeg
         apt install -y unzip wget git curl
         apt install -y libavresample-dev
         apt install -y linux-headers-$(uname -r)
+        apt install -y python3-websockets
         apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl \
         libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev
         
@@ -105,8 +106,8 @@ cp /etc/rtpengine/rtpengine.sample.conf  /etc/rtpengine/rtpengine.conf
 
 # We’ll uncomment the interface line and set the IP to the IP we’ll be listening on
 sudo sed -i 's/RUN_RTPENGINE = no/RUN_RTPENGINE = yes/' /etc/rtpengine/rtpengine.conf 
-sudo echo -e 'interface=$server_address' >> /etc/rtpengine/rtpengine.conf
-sudo sed -i 's/# recording-dir = /var/spool/rtpengine/recording-dir = /var/spool/rtpengine/' /etc/rtpengine/rtpengine.conf
+# sudo echo -e 'interface=$server_address' >> /etc/rtpengine/rtpengine.conf
+# sudo sed -i 's/# recording-dir = /var/spool/rtpengine/recording-dir = /var/spool/rtpengine/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# recording-method = proc/recording-method = proc/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# recording-format = raw/recording-format = raw/' /etc/rtpengine/rtpengine.conf
 sudo sed -i 's/# log-level = 6/log-level = 7/' /etc/rtpengine/rtpengine.conf
