@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #--------------------------------------------
-# Installation of RTPengine on debian 10 
+# Installation of RTPengine on debian 11 (Bullseye)
 #--------------------------------------------
 
 #set the ip address
@@ -22,10 +22,7 @@ echo -e "\n============= Update Server ================"
 sudo apt update && sudo apt -y upgrade
 sudo apt autoremove -y
 
-sudo apt install -y vim
-
-# disable vim visual mode
-echo "set mouse-=a" >> ~/.vimrc
+sudo apt install -y nano
 
 #-----------------------------------------------
 # Installation of FFMPEG v4
@@ -60,11 +57,12 @@ sudo apt install -y ffmpeg
         apt install -y linux-headers-$(uname -r)
         apt install -y python3-websockets
         apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl \
-        libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev
+        libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev \
+        libavutil-dev libiptc-dev libmosquitto-dev libjson-perl libxtables-dev libbcg729-dev libtest2-suite-perl
         
         # other dependencies
-        apt install -y cmake libavutil-dev libiptc-dev libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
-        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev libarchive13 libmosquitto-dev
+        apt install -y cmake libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
+        rpcbind libtirpc3 libconfig-tiny-perl dh-autoreconf libiptcdata-dev libarchive13 
     
 #--------------------------------------------
 # Download rtpengine from source
