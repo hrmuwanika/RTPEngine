@@ -144,6 +144,6 @@ systemctl enable firewalld
 systemctl start firewalld
 
 # Setup Firewall rules for RTPEngine
-firewall-cmd --zone=public --add-port=${RTP_PORT_MIN}-${RTP_PORT_MAX}/udp --permanent
+firewall-cmd --zone=public --add-port=30000-44999/udp --permanent
 firewall-cmd --reload
 
