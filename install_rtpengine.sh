@@ -33,7 +33,11 @@ sudo apt install -y ffmpeg
 #--------------------------------------------
 # Install required libraries
 #--------------------------------------------
-        apt install -y logrotate rsyslog
+        apt remove -y ufw
+        apt install -y firewalld
+        apt install -y libncurses-dev
+        apt install -y git logrotate rsyslog 
+        apt install -y libbcg729-0 libbcg729-dev
         apt install -y iptables-dev
         apt install -y libcurl4-openssl-dev
         apt install -y libpcre3-dev libxmlrpc-core-c3-dev
@@ -45,7 +49,7 @@ sudo apt install -y ffmpeg
         apt install -y libjson-glib-dev libpcap0.8-dev libpcap-dev libssl-dev
         apt install -y libavfilter-dev
         apt install -y libavformat-dev
-        apt install -y libmariadbclient-dev
+        apt install -y libmariadbclient-dev libmariadb-dev
         apt install -y default-libmysqlclient-dev
         apt install -y module-assistant
         apt install -y debhelper
@@ -55,10 +59,10 @@ sudo apt install -y ffmpeg
         apt install -y unzip wget git curl
         apt install -y libavresample-dev
         apt install -y linux-headers-$(uname -r)
-        apt install -y python3-websockets
+        apt install -y python3 python3-dev python3-websockets
         apt install -y gperf libbencode-perl libcrypt-openssl-rsa-perl libcrypt-rijndael-perl libdigest-crc-perl libdigest-hmac-perl \
         libio-multiplex-perl libio-socket-inet6-perl libnet-interface-perl libsocket6-perl libspandsp-dev libsystemd-dev libwebsockets-dev \
-        libavutil-dev libiptc-dev libmosquitto-dev libjson-perl libxtables-dev libbcg729-dev libtest2-suite-perl
+        libavutil-dev libiptc-dev libmosquitto-dev libjson-perl libxtables-dev libtest2-suite-perl
         
         # other dependencies
         apt install -y cmake libswresample-dev zlib1g-dev build-essential keyutils libnfsidmap2 libexporter-tidy-perl \
@@ -122,17 +126,24 @@ sudo sed -i 's/RUN_RTPENGINE_RECORDING=no/RUN_RTPENGINE_RECORDING=yes/' /etc/def
 cp /etc/rtpengine/rtpengine-recording.sample.conf /etc/rtpengine/rtpengine-recording.conf
 
 systemctl enable ngcp-rtpengine-daemon.service 
-systemctl enable ngcp-rtpengine-recording-daemon.service 
-systemctl enable ngcp-rtpengine-recording-nfs-mount.service
-
 systemctl restart ngcp-rtpengine-daemon.service 
-systemctl restart ngcp-rtpengine-recording-daemon.service 
-systemctl restart ngcp-rtpengine-recording-nfs-mount.service
+systemctl status ngcp-rtpengine-daemon.service
 
-systemctl status ngcp-rtpengine-daemon.service 
-systemctl status ngcp-rtpengine-recording-daemon.service 
+systemctl enable ngcp-rtpengine-recording-daemon.service 
+systemctl restart ngcp-rtpengine-recording-daemon.service 
+systemctl status ngcp-rtpengine-recording-daemon.service
+
+systemctl enable ngcp-rtpengine-recording-nfs-mount.service
+systemctl restart ngcp-rtpengine-recording-nfs-mount.service
 systemctl status ngcp-rtpengine-recording-nfs-mount.service
 
 ps -ef | grep rtpengine
 
+# Enable and start firewalld if not already running
+systemctl enable firewalld
+systemctl start firewalld
+
+# Setup Firewall rules for RTPEngine
+firewall-cmd --zone=public --add-port=${RTP_PORT_MIN}-${RTP_PORT_MAX}/udp --permanent
+firewall-cmd --reload
 
