@@ -95,10 +95,11 @@ dpkg-checkbuilddeps
 dpkg-buildpackage -us -uc -sa &&
 cd .. &&
 
-dpkg -i ./ngcp-rtpengine-iptables_*.deb
 dpkg -i ./ngcp-rtpengine-daemon_*.deb
 dpkg -i ./ngcp-rtpengine-kernel-dkms_*.deb
-dpkg -i ./ngcp-rtpengine-kernel-source_*.deb
+dpkg -i ./ngcp-rtpengine-perftest-data_*.deb
+dpkg -i ./ngcp-rtpengine-perftest_*.deb
+dpkg -i ./ngcp-rtpengine-kernel-dkms_*.deb
 dpkg -i ./ngcp-rtpengine-recording-daemon_*.deb
 dpkg -i ./ngcp-rtpengine-utils_*.deb
 dpkg -i ./ngcp-rtpengine_*.deb
