@@ -33,7 +33,7 @@ sudo apt install -y ffmpeg
 #--------------------------------------------
 # Install required libraries
 #--------------------------------------------
-        apt remove -y ufw
+        apt remove -y ufw apparmor
         apt install -y firewalld
         apt install -y libncurses-dev
         apt install -y git logrotate rsyslog 
@@ -145,5 +145,7 @@ systemctl start firewalld
 
 # Setup Firewall rules for RTPEngine
 firewall-cmd --zone=public --add-port=30000-40000/udp --permanent
+firewall-cmd --zone=public --add-port=5060-5066/udp --permanent
+firewall-cmd --zone=public --add-port=5060-5066/tcp --permanent
 firewall-cmd --reload
 
