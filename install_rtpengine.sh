@@ -22,7 +22,7 @@ echo -e "\n============= Update Server ================"
 sudo apt update && sudo apt -y upgrade
 sudo apt autoremove -y
 
-sudo apt install -y nano
+sudo apt install -y nano dh-sequence-dkms discount libmnl-dev libnftnl-dev libopus-dev liburing-dev pandoc
 
 #-----------------------------------------------
 # Installation of FFMPEG v4
